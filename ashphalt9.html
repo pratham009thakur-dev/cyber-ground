@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Ashphalt 9 Community</title>
+  <link rel="stylesheet" href="games.css" />
+</head>
+<body>
+    <body class="game-background" style="background-image: url('Information/Images/game9-bg.jpg');">
+
+  <div class="header">
+    <h1>🎮 Ashphalt 9 Community</h1>
+  </div>
+
+  <!-- 🗨️ Discussion Section -->
+  <section class="discussion-box">
+    <h2>📝 Discussion</h2>
+    <textarea placeholder="Share your thoughts..."></textarea>
+    <button onclick="postDiscussion()">Post</button>
+    <ul id="discussionList"></ul>
+  </section>
+
+  <!-- 💬 Live Chat Section -->
+  <section class="live-chat-box">
+    <h2>💬 Live Chat</h2>
+    <div id="chatBox" class="chat-window"></div>
+    <input type="text" id="chatInput" placeholder="Type a message..." />
+    <button onclick="sendChat()">Send</button>
+  </section>
+
+  <script>
+    // Simple local chat/discussion until backend
+    function postDiscussion() {
+      const val = document.querySelector('textarea').value.trim();
+      if(val) {
+        const li = document.createElement('li');
+        li.textContent = val;
+        document.getElementById('discussionList').appendChild(li);
+        document.querySelector('textarea').value = '';
+      }
+    }
+
+    function sendChat() {
+      const msg = document.getElementById('chatInput').value.trim();
+      if(msg) {
+        const p = document.createElement('p');
+        p.textContent = msg;
+        document.getElementById('chatBox').appendChild(p);
+        document.getElementById('chatInput').value = '';
+        document.getElementById('chatBox').scrollTop = document.getElementById('chatBox').scrollHeight;
+      }
+    }
+  </script>
+<a href="community.html" class="back-btn">⬅ Back</a>
+</body>
+</html>

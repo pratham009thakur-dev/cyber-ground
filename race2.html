@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Cyber F1 Grand Prix | Pro Split-Screen</title>
+    <style>
+        :root { --neon: #00d4ff; }
+        body { margin: 0; background: #050505; color: white; font-family: 'Segoe UI', sans-serif; overflow: hidden; }
+        
+        /* Menu System */
+        #menu { position: absolute; inset: 0; background: radial-gradient(circle, #111, #000); z-index: 1000; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+        .setup-group { margin: 15px; padding: 20px; border: 1px solid #333; border-radius: 12px; width: 85%; max-width: 600px; background: rgba(255,255,255,0.02); }
+        select, button { padding: 12px 24px; background: #111; color: white; border: 1px solid #444; cursor: pointer; margin: 5px; font-weight: bold; text-transform: uppercase; }
+        button:hover { background: var(--neon); color: black; box-shadow: 0 0 20px var(--neon); border-color: transparent; }
+        
+        /* Game Layout - Dynamic Grid */
+        #game-container { display: grid; width: 100vw; height: 100vh; background: #222; gap: 2px; }
+        .viewport { position: relative; background: #000; overflow: hidden; }
+        canvas { width: 100%; height: 100%; display: block; }
+        
+        /* HUD */
+        .hud { position: absolute; bottom: 15px; left: 15px; font-family: 'Courier New', monospace; pointer-events: none; }
+        .speed { font-size: 38px; font-weight: 900; font-style: italic; color: #fff; text-shadow: 0 0 10px rgba(0,0,0,1); }
+        .driver-tag { font-size: 14px; background: rgba(0,0,0,0.7); padding: 4px 10px; border-radius: 4px; letter-spacing: 1px; }
+        
+        #win-screen { position: absolute; inset: 0; background: rgba(0,0,0,0.95); display: none; flex-direction: column; align-items: center; justify-content: center; z-index: 2000; }
+        h1 { letter-spacing: 5px; margin-bottom: 30px; }
+    </style>
+</head>
+<body>
+
+    <div id="menu">
+        <h1>CYBER F1 GRAND PRIX</h1>
+        <div class="setup-group">
+            <h3>SELECT MODE</h3>
+            <button onclick="setupGame(1)">SOLO</button>
+            <button onclick="setupGame(2)">2P SPLIT</button>
+            <button onclick="setupGame(3)">3P GRID</button>
+            <button onclick="setupGame(4)">4P GRID</button>
+        </div>
+        <div class="setup-group">
+            <h3>LOCATION</h3>
+            <select id="trackSelect">
+                <option value="monaco">MONACO (Night Circuit)</option>
+                <option value="monza">MONZA (Speed Trap)</option>
+                <option value="spa">SPA (The Classic)</option>
+            </select>
+        </div>
+    </div>
+
+    <div id="win-screen">
+        <h1 id="winner-name" style="color: gold; font-size: 60px;"></h1>
+        <button onclick="location.reload()">MAIN MENU</button>
+    </div>
+
+    <div id="game-container"></div>
+
+<script>
+const CONFIG = {
+    drivers: [
+        { name: "VERSTAPPEN", color: "#1E41FF", accent: "#fff" },
+        { name: "HAMILTON", color: "#00D2BE", accent: "#000" },
+        { name: "LECLERC", color: "#DC0000", accent: "#fff" },
+        { name: "NORRIS", color: "#FF8700", accent: "#000" }
+    ],
+    controls: [
+        { up: 'KeyW', down: 'KeyS', left: 'KeyA', right: 'KeyD' },
+        { up: 'ArrowUp', down: 'ArrowDown', left: 'ArrowLeft', right: 'ArrowRight' },
+        { up: 'KeyI', down: 'KeyK', left: 'KeyJ', right: 'KeyL' },
+        { up: 'Numpad8', down: 'Numpad5', left: 'Numpad4', right: 'Numpad6' }
+    ]
+};
+
+let segments = [];
+let players = [];
+let gameRunning = false;
+const SEG_L = 200;
+const ROAD_W = 2000;
+
+function createTrack(type) {
+    segments = [];
+    const len = 5000;
+    for(let i=0; i<len; i++) {
+        let curve = 0;
+        if(type === 'monaco') curve = Math.sin(i/12) * 5.5;
+        else if(type === 'monza') curve = (i > 1000 && i < 1200) ? 7 : (i > 3000 && i < 3200) ? -7 : 0;
+        else curve = Math.sin(i/25) * 4;
+
+        segments.push({
+            z: i * SEG_L, curve: curve,
+            color: Math.floor(i/3) % 2 ? '#111' : '#181818',
+            rumble: Math.floor(i/3) % 2 ? '#ff2a2a' : '#fff',
+            scenery: (i % 40 === 0) ? (Math.random() > 0.5 ? 1.8 : -1.8) : null
+        });
+    }
+}
+
+class F1Car {
+    constructor(id, driver, controls, container) {
+        this.driver = driver;
+        this.controls = controls;
+        this.pos = 0; this.x = (id * 0.4) - 0.6; this.speed = 0;
+        
+        this.view = document.createElement('div');
+        this.view.className = 'viewport';
+        this.canvas = document.createElement('canvas');
+        this.ctx = this.canvas.getContext('2d');
+        this.hud = document.createElement('div');
+        this.hud.className = 'hud';
+        this.hud.innerHTML = `<div class="driver-tag" style="border-left: 6px solid ${driver.color}">${driver.name}</div><div class="speed">0 <span style="font-size:14px">KM/H</span></div>`;
+        
+        this.view.appendChild(this.canvas);
+        this.view.appendChild(this.hud);
+        container.appendChild(this.view);
+        
+        this.resize();
+    }
+
+    resize() {
+        this.canvas.width = this.view.offsetWidth;
+        this.canvas.height = this.view.offsetHeight;
+    }
+
+    update(keys) {
+        if (keys[this.controls.up]) this.speed += 8;
+        else if (keys[this.controls.down]) this.speed -= 25;
+        else this.speed -= 4;
+        
+        this.speed = Math.max(0, Math.min(this.speed, 800)); // Cap 80km/h
+        
+        const seg = segments[Math.floor(this.pos/SEG_L) % segments.length];
+        this.x -= (this.speed/800) * seg.curve * 0.007;
+
+        if (keys[this.controls.left]) this.x -= 0.04;
+        if (keys[this.controls.right]) this.x += 0.04;
+
+        // Friction/Wall hit
+        if(Math.abs(this.x) > 0.95) { this.speed *= 0.95; this.x = Math.sign(this.x) * 0.95; }
+
+        this.pos += this.speed;
+        this.hud.querySelector('.speed').innerHTML = `${Math.floor(this.speed/10)} <span style="font-size:14px">KM/H</span>`;
+        
+        if(this.pos > (segments.length - 100) * SEG_L) finish(this.driver.name);
+    }
+
+    render() {
+        const { ctx, canvas, pos, x } = this;
+        ctx.fillStyle = '#050508'; ctx.fillRect(0,0,canvas.width,canvas.height);
+        
+        let xOffset = 0, dx = 0;
+        const startIdx = Math.floor(pos/SEG_L);
+        const camH = 1500;
+
+        for(let n=0; n<130; n++) {
+            const i = (startIdx + n) % segments.length;
+            const s = segments[i];
+            const p1 = this.project(s.z, xOffset, pos, x);
+            const p2 = this.project(s.z + SEG_L, xOffset + s.curve, pos, x);
+            xOffset += dx; dx += s.curve;
+
+            if(p1.y <= p2.y) continue;
+
+            // Rumble Strips
+            ctx.fillStyle = s.rumble;
+            ctx.fillRect(p1.x - p1.w * 1.1, p1.y, p1.w * 2.2, p1.y - p2.y + 2);
+
+            // Road
+            ctx.fillStyle = s.color;
+            ctx.beginPath(); ctx.moveTo(p1.x-p1.w, p1.y); ctx.lineTo(p1.x+p1.w, p1.y);
+            ctx.lineTo(p2.x+p2.w, p2.y); ctx.lineTo(p2.x-p2.w, p2.y); ctx.fill();
+
+            // Tech Towers
+            if(s.scenery) {
+                const b = this.project(s.z, xOffset + (s.scenery * ROAD_W), pos, x);
+                ctx.fillStyle = '#111';
+                ctx.fillRect(b.x - b.w*0.3, b.y, b.w*0.6, -b.w*2);
+                ctx.strokeStyle = '#0ff'; ctx.lineWidth = 1;
+                ctx.strokeRect(b.x - b.w*0.3, b.y, b.w*0.6, -b.w*2);
+            }
+        }
+
+        // Draw F1 Car Sprite
+        this.drawF1Car(ctx, canvas);
+    }
+
+    drawF1Car(ctx, canvas) {
+        const cx = canvas.width/2;
+        const cy = canvas.height - 120;
+        
+        ctx.shadowBlur = 20; ctx.shadowColor = this.driver.color;
+        
+        // Tires
+        ctx.fillStyle = "#111";
+        ctx.fillRect(cx - 55, cy + 10, 20, 40);
+        ctx.fillRect(cx + 35, cy + 10, 20, 40);
+        
+        // Body (Aero Shape)
+        ctx.fillStyle = this.driver.color;
+        ctx.beginPath();
+        ctx.moveTo(cx - 15, cy - 60); // nose
+        ctx.lineTo(cx + 15, cy - 60);
+        ctx.lineTo(cx + 35, cy + 30); // sidepod
+        ctx.lineTo(cx - 35, cy + 30);
+        ctx.closePath();
+        ctx.fill();
+
+        // Rear Wing
+        ctx.fillStyle = "#222";
+        ctx.fillRect(cx - 45, cy + 35, 90, 10);
+        
+        ctx.shadowBlur = 0;
+    }
+
+    project(z, xOffset, camZ, camX) {
+        const scale = 0.8 / (z - camZ);
+        return {
+            x: (1 + scale * (xOffset - camX * ROAD_W)) * this.canvas.width / 2,
+            y: (1 - scale * -1500) * this.canvas.height / 2,
+            w: scale * ROAD_W * this.canvas.width / 2
+        };
+    }
+}
+
+function setupGame(count) {
+    const container = document.getElementById('game-container');
+    const trackType = document.getElementById('trackSelect').value;
+    container.innerHTML = '';
+    players = [];
+    
+    // Dynamic Grid CSS
+    if(count === 1) { container.style.gridTemplateColumns = '1fr'; container.style.gridTemplateRows = '1fr'; }
+    else if(count === 2) { container.style.gridTemplateColumns = '1fr 1fr'; container.style.gridTemplateRows = '1fr'; }
+    else { container.style.gridTemplateColumns = '1fr 1fr'; container.style.gridTemplateRows = '1fr 1fr'; }
+    
+    createTrack(trackType);
+    for(let i=0; i<count; i++) {
+        players.push(new F1Car(i, CONFIG.drivers[i], CONFIG.controls[i], container));
+    }
+    
+    document.getElementById('menu').style.display = 'none';
+    gameRunning = true;
+    loop();
+}
+
+const keys = {};
+window.onkeydown = e => keys[e.code] = true;
+window.onkeyup = e => keys[e.code] = false;
+
+function finish(name) {
+    gameRunning = false;
+    document.getElementById('win-screen').style.display = 'flex';
+    document.getElementById('winner-name').innerText = name + " WINS!";
+}
+
+function loop() {
+    if(!gameRunning) return;
+    players.forEach(p => { p.update(keys); p.render(); });
+    requestAnimationFrame(loop);
+}
+
+window.addEventListener('resize', () => players.forEach(p => p.resize()));
+</script>
+</body>
+</html>

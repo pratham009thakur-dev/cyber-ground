@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Select Game - Teams</title>
+  <link rel="stylesheet" href="team.css" />
+</head>
+<body>
+
+  <div class="form-box">
+    <h2>Start with Your Game</h2>
+    <input type="text" id="userName" placeholder="Enter Your Name" required />
+    <select id="gameName" required>
+      <option value="">-- Select Game --</option>
+      <option>BGMI</option>
+      <option>COD</option>
+      <option>Valorant</option>
+      <option>Clash of Clans</option>
+      <option>Pokemon Unite</option>
+      <option>League of Legends</option>
+      <option>Clash Royale</option>
+      <option>Apex Legends</option>
+      <option>Asphalt 9</option>
+      <option>CS:GO</option>
+      <option>Rocket League</option>
+      <option>FIFA Mobile</option>
+      <!-- Add all 12 -->
+    </select>
+    <button onclick="goToTeamDashboard()">Continue</button>
+  </div>
+  <a href="community.html" class="back-btn">⬅ Back</a>
+
+  <script>
+    function goToTeamDashboard() {
+      const name = document.getElementById('userName').value.trim();
+      const game = document.getElementById('gameName').value.trim();
+      if(name && game) {
+        window.location.href = `team-dashboard.html?name=${encodeURIComponent(name)}&game=${encodeURIComponent(game)}`;
+      } else {
+        alert("Please enter your name and select a game.");
+      }
+    }
+  </script>
+
+</body>
+</html>

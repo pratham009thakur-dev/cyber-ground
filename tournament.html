@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Select Game - Tournaments</title>
+  <link rel="stylesheet" href="tournaments.css">
+</head>
+<body>
+
+  <div class="form-box">
+    <h2>Enter Tournament Arena</h2>
+    <input type="text" id="userName" placeholder="Enter Your Name" required />
+    <select id="gameName" required>
+      <option value="">-- Select Game --</option>
+      <option>BGMI</option>
+      <option>COD</option>
+      <option>Valorant</option>
+      <option>Clash of Clans</option>
+      <option>Pokemon Unite</option>
+      <option>League of Legends</option>
+      <option>Clash Royale</option>
+      <option>Apex Legends</option>
+      <option>Asphalt 9</option>
+      <option>CS:GO</option>
+      <option>Rocket League</option>
+      <option>FIFA Mobile</option>
+    </select>
+    <button onclick="goToDashboard()">Continue</button>
+  </div>
+  
+  <a href="community.html" class="back-btn">⬅ Back</a>
+
+  <script>
+    function goToDashboard() {
+      const name = document.getElementById('userName').value.trim();
+      const game = document.getElementById('gameName').value.trim();
+      if(name && game) {
+        window.location.href = `tournaments-dashboard.html?name=${encodeURIComponent(name)}&game=${encodeURIComponent(game)}`;
+      } else {
+        alert("Please fill in both fields.");
+      }
+    }
+  </script>
+
+</body>
+</html>

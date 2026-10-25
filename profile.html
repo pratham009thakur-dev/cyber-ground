@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CyberGround Profile</title>
+  <link rel="stylesheet" href="profile.css" />
+</head>
+<body>
+
+  <div class="container">
+    <!-- Profile Header -->
+    <div class="profile-header">
+      <!-- Avatar Image Upload -->
+      <label for="avatar-upload">
+        <div class="avatar" id="profile-avatar" style="background-image: url('https://via.placeholder.com/150');"></div>
+      </label>
+      <input type="file" id="avatar-upload" accept="image/*" style="display: none;" />
+
+      <!-- Profile Info -->
+      <div class="profile-info">
+        <h1 id="username">Loading...</h1>
+        <p id="user-email">Loading...</p>
+        <p id="user-joined">Loading...</p>
+      </div>
+      
+      <!-- Edit Profile Modal -->
+<div id="editModal" class="modal">
+  <div class="modal-content">
+    <span class="close-btn" onclick="closeEdit()">&times;</span>
+    <h2>Edit Profile</h2>
+    
+    <label>Name:</label>
+    <input type="text" id="edit-name" />
+
+    <label>Email:</label>
+    <input type="email" id="edit-email" />
+
+    <label>Game Interests (comma separated):</label>
+    <input type="text" id="edit-interests" />
+
+    <label>Communities (comma separated):</label>
+    <input type="text" id="edit-communities" />
+
+    <button onclick="saveProfile()">Save</button>
+  </div>
+</div>
+
+      <button class="edit-btn">Edit Profile</button>
+    </div>
+
+    <!-- Cyber ID -->
+    <div class="cyber-id" id="cyber-id">Cyber ID: Loading...</div>
+
+    <!-- Dynamic Content Injected Here -->
+    <div id="dynamic-sections"></div>
+  </div>
+<center>
+  <a href="index.html" class="back-btn">⬅ Back to Home</a>
+  </center>
+  <script src="profile.js"></script>
+</body>
+</html>

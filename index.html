@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cyber Playground</title>
+    <link rel="stylesheet" href="website.css">
+    <script defer src="website.js"></script>
+    <style>
+        @media only screen and (orientation: portrait) {
+          body::before {
+            content: "Please rotate your device to landscape mode for the best experience.";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: #000;
+            color: #fff;
+            font-size: 24px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            z-index: 9999;
+            padding: 20px;
+          }
+      
+          body > * {
+            display: none !important;
+          }
+        }
+      </style>
+      
+</head>
+<body>
+  <nav>
+    <a href="profile.html" class="profile-container">
+      <img src="Information/Images/avatar.png" alt="Player Avatar" class="profile-avatar">
+      <span class="profile-name">Player Name</span>
+    </a>
+    
+    <ul>
+      <li><a href="index.html">Home</a></li>
+  
+      <!-- Accessories Dropdown -->
+      <li class="dropdown">
+        <a href="#">Accessories ▾</a>
+        <ul class="dropdown-content">
+          <li><a href="mobile.html">Mobile Accessories</a></li>
+          <li><a href="pc.html">PC Accessories</a></li>
+        </ul>
+      </li>
+  
+      <li><a href="login.html">Login</a></li>
+      <li class ="dropdown">
+        <a href="#">Custom Game ▾</a>
+        <ul class ="dropdown-content">
+          <li><a href="game.html">Cosmic Rush (BETA)</a></li>
+          <li><a href="race.html">Highway Racer(BETA)</a></li>
+          <li><a href="race2.html">Cyber Gran Prix(BETA)</a></li>
+        </ul>
+      </li>
+      <li><a href="about.html">About Us</a></li>
+    </ul>
+  </nav>
+  
+      
+    <header class="main-header">
+        <h1>Welcome to the Cyber Playground</h1>
+        <p>Unite with gamers worldwide. Explore. Play. Win!</p>
+        <!-- Join the Community Button -->
+        <button id="join-community-btn">Join the Community</button>          
+    </header>
+
+    <main>
+        <!-- Featured Games Section -->
+        <section class="featured-games">
+            <h2>Featured E-Sports Games</h2>
+            <div class="game-cards">
+                <div class="game-card">
+                    <img src="Information/Images/game1.jpg" alt="Game 1">
+                    <h3>BattleGrounds Moblie India</h3>
+                    <p>Developed by Krafton,Inc.</p>
+                    <a href="Information/game1.html" class="read-more-btn">Read More...</a>
+                </div>
+                <div class="game-card">
+                    <img src="Information/Images/game2.jpg" alt="Game 2">
+                    <h3>Call of Duty Mobile</h3>
+                    <p>Developed by Activision Publishing,Inc.</p>
+                    <a href="Information/game2.html" class="read-more-btn">Read More...</a>
+                </div>
+                <div class="game-card">
+                    <img src="Information/Images/game3.jpg" alt="Game 3">
+                    <h3>Valorant</h3>
+                    <p>Developed by Riot Games.</p>
+                    <a href="Information/game3.html" class="read-more-btn">Read More...</a>
+                </div>
+                <div class="game-card">
+                    <img src="Information/Images/game4.jpg" alt="Game 1">
+                    <h3>Clash of Clans</h3>
+                    <p>Developed by Supercell.</p>
+                    <a href="Information/game4.html" class="read-more-btn">Read More...</a>
+                </div>
+                <div class="game-card">
+                    <img src="Information/Images/game5.jpg" alt="Game 1">
+                    <h3>Pokemon Unite</h3>
+                    <p>Developed by Timi Studio Group.</p>
+                    <a href="Information/game5.html" class="read-more-btn">Read More...</a>
+                </div>
+                <div class="game-card">
+                    <img src="Information/Images/game6.jpg" alt="Game 1">
+                    <h3>League of Legends </h3>
+                    <p>Developed by Riot Games.</p>
+                    <a href="Information/game6.html" class="read-more-btn">Read More...</a>
+                </div>
+                <div class="game-card">
+                    <img src="Information/Images/game7.jpg" alt="Game 7">
+                    <h3>Clash Royale</h3>
+                    <p>Developed by Supercell.</p>
+                    <a href="Information/game7.html" class="read-more-btn">Read More...</a>
+                  </div>
+                  <div class="game-card">
+                    <img src="Information/Images/game8.jpg" alt="Game 8">
+                    <h3>Apex Legends</h3>
+                    <p>Developed by Respawn Entertainment.</p>
+                    <a href="Information/game8.html" class="read-more-btn">Read More...</a>
+                  </div>  
+                  <div class="game-card">
+                    <img src="Information/Images/game9.jpg" alt="Game 9">
+                    <h3>Ashphalt 9</h3>
+                    <p>Developed by Gameloft.</p>
+                    <a href="Information/game9.html" class="read-more-btn">Read More...</a>
+                  </div>
+                  <div class="game-card">
+                    <img src="Information/Images/game10.jpg" alt="Game 10">
+                    <h3>Counter Strike: Global Offensive</h3>
+                    <p>Developed by Valve.</p>
+                    <a href="Information/game10.html" class="read-more-btn">Read More...</a>
+                  </div>
+                  <div class="game-card">
+                    <img src="Information/Images/game11.jpg" alt="Game 11">
+                    <h3>Rocket League</h3>
+                    <p>Developed by Psyonix.</p>
+                    <a href="Information/game11.html" class="read-more-btn">Read More...</a>
+                  </div>
+                  <div class="game-card">
+                    <img src="Information/Images/game12.jpg" alt="Game 12">
+                    <h3>Fifa Mobile</h3> 
+                    <p>Developed by EA Sports.</p>
+                    <a href="Information/game12.html" class="read-more-btn">Read More...</a>
+                  </div>        
+            </div>
+        </section>
+        <section class="featured-games">
+            <h2>Trending Games</h2>
+            <div class="game-cards">
+                <div class="game-card">
+                    <img src="Information/Images/trending1.jpg" alt="Trending Game 1">
+                    <h3>Subway Surfers</h3>
+                    <p>Developed by SYBO Games.</p>
+                    <a href="Information/trending1.html" class="read-more-btn">Read More...</a>
+                </div>
+                <div class="game-card">
+                    <img src="Information/Images/trending2.jpg" alt="Trending Game 2">
+                    <h3>Roblox</h3>
+                    <p>Developed by Roblox Corporation.</p>
+                    <a href="Information/trending2.html" class="read-more-btn">Read More...</a>
+                </div>
+                <div class="game-card">
+                    <img src="Information/Images/trending3.jpg" alt="Trending Game 3">
+                    <h3>Candy Crush Saga</h3>
+                    <p>Developed by King.</p>
+                    <a href="Information/trending3.html" class="read-more-btn">Read More...</a>
+                </div>
+                <div class="game-card">
+                    <img src="Information/Images/trending4.jpg" alt="Trending Game 4">
+                    <h3>Attack Hole</h3>
+                    <p>Developed by Homa Games.</p>
+                    <a href="Information/trending4.html" class="read-more-btn">Read More...</a>
+                </div>
+                <div class="game-card">
+                    <img src="Information/Images/trending5.jpg" alt="Trending Game 5">
+                    <h3>Block Blast Adventure</h3>
+                    <p>Developed by Hungry Studio.</p>
+                    <a href="Information/trending5.html" class="read-more-btn">Read More...</a>
+                  </div>        
+                  <div class="game-card">
+                    <img src="Information/Images/trending6.jpg" alt="Trending Game 6">
+                    <h3>Race Master 3D</h3>
+                    <p>Developed by Beresnev Games.</p>
+                    <a href="Information/trending6.html" class="read-more-btn">Read More...</a>
+                  </div>
+                  <div class="game-card">
+                    <img src="Information/Images/trending7.jpg" alt="Trending Game 7">
+                    <h3>Black Myth:Wukong</h3>
+                    <p>Developed by Game Science.</p>
+                    <a href="Information/trending7.html" class="read-more-btn">Read More...</a>
+                  </div>
+                  <div class="game-card">
+                    <img src="Information/Images/trending8.jpg" alt="Trending Game 8">
+                    <h3>Elden Ring</h3>
+                    <p>Developed by FromSoftware.</p>
+                    <a href="Information/trending8.html" class="read-more-btn">Read More...</a>
+                  </div>
+                  <div class="game-card">
+                    <img src="Information/Images/trending9.jpg" alt="Trending Game 9">
+                    <h3>The Witcher 3:Wild Hunt</h3> 
+                    <p>Developed by CD Projekt Red.</p>
+                    <a href="Information/trending9.html" class="read-more-btn">Read More...</a>
+                  </div>
+                  <div class="game-card">
+                    <img src="Information/Images/trending10.jpg" alt="Trending Game 10">
+                    <h3>CyberPunk 2077</h3>
+                    <p>Developed by CD Projekt Red.</p>
+                    <a href="Information/trending10.html" class="read-more-btn">Read More...</a>
+                  </div>
+                  <div class="game-card">
+                    <img src="Information/Images/trending11.jpg" alt="Trending Game 11">
+                    <h3>Baldur's Gate 3</h3>
+                    <p>Developed by Larian Studios.</p>
+                    <a href="Information/trending11.html" class="read-more-btn">Read More...</a>
+                  </div>
+                  <div class="game-card">
+                    <img src="Information/Images/trending12.jpg" alt="Trending Game 12">
+                    <h3>Dragon Age:The Viel</h3>
+                    <p>Developed by BioWare.</p>
+                    <a href="Information/trending12.html" class="read-more-btn">Read More...</a>
+                  </div>
+            </div>
+        </section>
+
+        <!-- Community Updates Section -->
+        <section class="community-updates">
+            <h2>Community Updates</h2>
+            <ul id="updates-list">
+                <li>Update 1: New tournament announced! <span class="read-more">Read more...</span></li>
+                <li>Update 2: Top player rankings for this week. <span class="read-more">Read more...</span></li>
+                <li>Update 3: Patch notes for your favorite game. <span class="read-more">Read more...</span></li>
+            </ul>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Gaming Community. All Rights Reserved.</p>
+    </footer>
+    <script>
+      document.getElementById("join-community-btn").addEventListener("click", () => {
+        if (sessionStorage.getItem("isLoggedIn") === "true") {
+          window.location.href = "community.html";
+        } else {
+          window.location.href = "login.html";
+        }
+      });
+    </script>
+    
+</body>
+</html>

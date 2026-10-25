@@ -1,0 +1,359 @@
+/* General Reset */
+* {
+  padding: 0;
+  margin: 0;
+  text-decoration: none;
+  list-style: none;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Montserrat', sans-serif;
+  background: linear-gradient(135deg, #141E30, #243B55);
+  color: #ffffff;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Navbar */
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #141E30;
+  padding: 15px 30px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.5);
+  position: sticky;
+  top: 0;
+  z-index: 999;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+}
+
+.logo-img {
+  height: 60px;
+  margin-right: 10px;
+  border-radius: 5px;
+}
+
+.logo-text {
+  color: #fff;
+  font-size: 28px;
+  font-weight: bold;
+  font-family: 'Orbitron', sans-serif;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 10px;
+}
+
+nav ul li a {
+  color: white;
+  font-weight: 500;
+  font-size: 16px;
+  text-transform: uppercase;
+  padding: 8px 12px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+nav ul li a:hover,
+nav ul li a.active {
+  background-color: #ff4c29;
+  color: white;
+  transform: scale(1.05);
+}
+
+/* Header Section */
+.main-header {
+  text-align: center;
+  padding: 50px 20px;
+  background: rgba(0, 0, 0, 0.8);
+}
+
+.main-header h1 {
+  font-size: 2.8rem;
+  margin-bottom: 10px;
+}
+
+.main-header p {
+  margin-bottom: 20px;
+  font-size: 1.2rem;
+}
+
+#join-community-btn {
+  background-color: #FFA500; /* Orange */
+  color: white;
+  padding: 12px 25px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: bold;
+  margin-top: 15px;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+#join-community-btn:hover {
+  background-color: #FF8C00; /* Darker Orange */
+  transform: scale(1.05);
+}
+
+
+.cta-button {
+  background: #f39c12;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-weight: bold;
+  font-size: 16px;
+  transition: background 0.3s ease;
+  text-decoration: none;
+}
+
+.cta-button:hover {
+  background: #e67e22;
+}
+
+/* Featured Games */
+.featured-games {
+  padding: 30px 20px;
+  text-align: center;
+}
+
+.featured-games h2 {
+  font-size: 2.2rem;
+  margin-bottom: 20px;
+}
+
+.game-cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+.game-card {
+  background: rgba(0, 0, 0, 0.7);
+  border-radius: 10px;
+  padding: 15px;
+  max-width: 200px;
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 280px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.game-card:hover {
+  transform: scale(1.05);
+  background-color: rgba(255, 255, 255, 0.05);
+  box-shadow: 0 8px 20px rgba(255, 76, 41, 0.6);
+}
+
+.game-card img {
+  height: 100px;
+  object-fit: contain;
+  margin-bottom: 10px;
+  border-radius: 10px;
+}
+
+.game-card h3 {
+  font-size: 1.1rem;
+  margin-bottom: 5px;
+}
+
+.game-card p {
+  font-size: 0.9rem;
+  color: #ddd;
+}
+
+/* Read More Button */
+.read-more-btn {
+  display: inline-block;
+  padding: 6px 12px;
+  background-color: #FFA500;
+  color: white;
+  font-weight: bold;
+  border-radius: 5px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  font-size: 14px;
+  text-decoration: none;
+  margin-top: 8px;
+}
+
+.read-more-btn:hover {
+  background-color: #FF8C00;
+  transform: scale(1.05);
+}
+
+/* Community Updates */
+.community-updates {
+  padding: 30px 20px;
+  background: rgba(0, 0, 0, 0.8);
+  text-align: center;
+}
+
+.community-updates h2 {
+  margin-bottom: 20px;
+  font-size: 2rem;
+}
+
+#updates-list {
+  list-style: none;
+}
+
+#updates-list li {
+  margin-bottom: 10px;
+  font-size: 1rem;
+}
+
+.read-more {
+  color: #f39c12;
+  cursor: pointer;
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  padding: 15px 20px;
+  background: #000;
+  color: white;
+  font-size: 14px;
+  margin-top: auto;
+}
+
+/* Sticky footer support */
+body > main {
+  flex: 1;
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+  nav {
+      flex-direction: column;
+      align-items: center;
+  }
+
+  nav ul {
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 10px;
+  }
+
+  .logo-text {
+      font-size: 22px;
+  }
+
+  .game-cards {
+      flex-direction: column;
+      align-items: center;
+  }
+
+  .game-card {
+      width: 90%;
+      height: auto;
+  }
+
+  .game-card img {
+      height: 120px;
+  }
+
+  .main-header h1 {
+      font-size: 2rem;
+  }
+
+  .featured-games h2,
+  .community-updates h2 {
+      font-size: 1.8rem;
+  }
+
+  .cta-button {
+      font-size: 14px;
+      padding: 8px 16px;
+  }
+}
+.profile-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;  /* link underline hata de */
+}
+
+.profile-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 2px solid #00e5ff;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.profile-name {
+  font-size: 16px;
+  font-weight: 600;
+  color: #00e5ff;
+  transition: color 0.3s ease;
+}
+
+.profile-container:hover .profile-avatar {
+  transform: scale(1.1);
+}
+
+.profile-container:hover .profile-name {
+  color: #ff0055; /* hover pe thoda effect */
+}
+/* Dropdown Base */
+.dropdown {
+  position: relative;
+}
+
+.dropdown > a {
+  cursor: pointer;
+}
+
+/* Dropdown Menu */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  top: 100%; /* seedha niche */
+  left: 0;
+  background: #1a1a1a;
+  border: 1px solid #ff4c29;
+  border-radius: 6px;
+  min-width: 180px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.6);
+  z-index: 1000;
+}
+
+.dropdown-content li {
+  list-style: none;
+}
+
+.dropdown-content li a {
+  display: block;
+  padding: 10px 15px;
+  color: #e0e0e0;
+  text-decoration: none;
+  transition: background 0.3s ease;
+}
+
+.dropdown-content li a:hover {
+  background: #ff4c29;
+  color: #fff;
+}
+
+/* Yeh important hai — dropdown tab tak open rahe jab tak cursor dropdown ya button pe hai */
+.dropdown:hover .dropdown-content,
+.dropdown-content:hover {
+  display: block;
+}

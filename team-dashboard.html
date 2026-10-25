@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Team Dashboard</title>
+  <link rel="stylesheet" href="team.css" />
+</head>
+<body>
+
+  <div class="dashboard-container">
+    <h2 id="pageHeading"></h2>
+
+    <div class="split-section">
+      <!-- Join Team -->
+      <div class="join-section">
+        <h3>Join a Team</h3>
+        <input type="text" placeholder="Enter Team Code or Name" />
+        <button>Join Team</button>
+      </div>
+      <!-- Create Team -->
+<div class="create-section">
+    <h3>Create a New Team</h3>
+  
+    <input type="text" id="teamName" placeholder="Team Name" required />
+  
+    <select id="teamGame" required>
+      <option value="">-- Select Game --</option>
+      <option>BGMI</option>
+      <option>COD</option>
+      <option>Valorant</option>
+      <option>Clash of Clans</option>
+      <option>Pokemon Unite</option>
+      <option>League of Legends</option>
+      <option>Clash Royale</option>
+      <option>Apex Legends</option>
+      <option>Asphalt 9</option>
+      <option>CS:GO</option>
+      <option>Rocket League</option>
+      <option>FIFA Mobile</option>
+      <!-- all 12 -->
+    </select>
+  
+    <input type="number" id="maxMembers" placeholder="Max Members (e.g. 4)" min="2" max="10" required />
+  
+    <input type="text" id="teamCode" placeholder="Team Code" readonly />
+  
+    <button onclick="generateTeamCode()">Generate Code</button>
+    <button onclick="createTeam()">Create Team</button>
+  </div>
+
+    </div>
+  <a href="team.html" class="back-btn">⬅ Back</a>
+
+  <script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const name = urlParams.get('name');
+    const game = urlParams.get('game');
+    document.getElementById('pageHeading').textContent = `Welcome ${name} to ${game} Team Hub!`;
+  function generateTeamCode() {
+    const code = 'TC-' + Math.floor(10000 + Math.random() * 90000);
+    document.getElementById('teamCode').value = code;
+  }
+
+  function createTeam() {
+    const name = document.getElementById('teamName').value.trim();
+    const game = document.getElementById('teamGame').value.trim();
+    const members = document.getElementById('maxMembers').value.trim();
+    const code = document.getElementById('teamCode').value.trim();
+
+    if (!name || !game || !members || !code) {
+      alert("Please fill all fields and generate a team code.");
+      return;
+    }
+
+    alert(`✅ Team "${name}" created!\n🆔 Code: ${code}\n🎮 Game: ${game}\n👥 Max Members: ${members}`);
+  }
+
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Select Community - Cyber Playground</title>
+  <link rel="stylesheet" href="community.css" />
+</head>
+<body>
+  <nav class="navbar">
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="community.html">Community</a></li>
+      <li><a href="team.html">Teams</a></li>
+      <li><a href="tournament.html">Tournaments</a></li>
+      <li><a href="player.html">Players</a></li>
+    </ul>
+  </nav>
+  
+  <h2>Choose Your Game Community</h2>
+
+  <div class="game-community-list">
+    <div class="game-card" onclick="goToCommunity('bgmi')">
+      <img src="Information/Images/game1.jpg" alt="BGMI">
+      <h3>BGMI</h3>
+    </div>
+    <div class="game-card" onclick="goToCommunity('cod')">
+      <img src="Information/Images/game2.jpg" alt="Call of Duty">
+      <h3>Call of Duty</h3>
+    </div>
+    <div class="game-card" onclick="goToCommunity('valorant')">
+      <img src="Information/Images/game3.jpg" alt="Valorant">
+      <h3>Valorant</h3>
+    </div>
+    <div class="game-card" onclick="goToCommunity('clashofclans')">
+      <img src="Information/Images/game4.jpg" alt="Clash of Clans">
+      <h3>Clash of Clans</h3>
+    </div>
+    <div class="game-card" onclick="goToCommunity('pokemonunite')">
+      <img src="Information/Images/game5.jpg" alt="Pokemon Unite">
+      <h3>Pokemon Unite</h3>
+    </div>
+    <div class="game-card" onclick="goToCommunity('leagueoflegends')">
+        <img src="Information/Images/game6.jpg" alt="League of Legends">
+        <h3>League of Legends</h3>
+      </div>
+      <div class="game-card" onclick="goToCommunity('clashroyale')">
+        <img src="Information/Images/game7.jpg" alt="Clash Royale">
+        <h3>Clash Royale</h3>
+      </div>
+      <div class="game-card" onclick="goToCommunity('apexlegends')">
+        <img src="Information/Images/game8.jpg" alt="Apex Legends">
+        <h3>Apex Legends</h3>
+      </div>
+      <div class="game-card" onclick="goToCommunity('ashphalt9')">
+        <img src="Information/Images/game9.jpg" alt="Ashphalt 9">
+        <h3>Ashphalt 9</h3>
+      </div>
+      <div class="game-card" onclick="goToCommunity('counterstrike')">
+        <img src="Information/Images/game10.jpg" alt="Counter Strike: Global Offensive">
+        <h3>Counter Strike: Global Offensive</h3>
+      </div>
+      <div class="game-card" onclick="goToCommunity('rocketleague')">
+        <img src="Information/Images/game11.jpg" alt="Rocket League">
+        <h3>Rocket League</h3>
+      </div>
+      <div class="game-card" onclick="goToCommunity('fifamobile')">
+        <img src="Information/Images/game12.jpg" alt="Fifa Mobile">
+        <h3>Fifa Mobile</h3>
+      </div>
+  </div>
+
+  <a href="index.html" class="back-btn">⬅ Back to Home</a>
+
+  <footer>
+    <p>&copy; 2024 Gaming Community. All Rights Reserved.</p>
+</footer>
+
+  <script>
+    function goToCommunity(game) {
+  window.location.href = `${game}.html`;
+}
+  </script>
+
+</body>
+</html>
